@@ -8,5 +8,6 @@ build_image:
     - docker:dind
   script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-    - docker build -t $CI_REGISTRY/group/project/image:latest .
-    - docker push $CI_REGISTRY/group/project/image:latest
+    - docker build -t $CI_REGISTRYdocker/echelon-it/k8s-data/sample:v1 .
+    - docker push $CI_REGISTRY/echelon-it/k8s-data/sample:v1
+    - echo "Image built"
