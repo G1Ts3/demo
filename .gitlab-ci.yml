@@ -1,0 +1,13 @@
+stages:
+    - build
+
+build_image:
+  image: docker
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker build -t $CI_REGISTRY/echelon-it/k8s-data/sample:v1 .
+    - docker push $CI_REGISTRY/echelon-it/k8s-data/sample:v1
+    - echo "Image built"
