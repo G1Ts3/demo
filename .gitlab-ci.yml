@@ -1,5 +1,5 @@
 variables:
-  KUBE_CONTEXT: echelon-it/k8s-connection
+  KUBE_CONTEXT: echelon-it/k8s-connection:k8s-connection
   
 stages:
     - build
@@ -22,6 +22,6 @@ deploy_project:
     name: bitnami/kubectl:latest
     entrypoint: ['']
   script:
-    - kubectl config use-context $KUBE_CONTEXT:k8s-connection
+    - kubectl config use-context $KUBE_CONTEXT
     - kubectl get pods
     - kubectl get nodes -o wide
