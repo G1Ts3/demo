@@ -1,5 +1,9 @@
+variables:
+  KUBE_CONTEXT: echelon-it/k8s-connection
+  
 stages:
     - build
+    - deploy
 
 build_image:
   image: docker
@@ -11,3 +15,13 @@ build_image:
     - docker build -t $CI_REGISTRY/echelon-it/k8s-data/sample:v1 .
     - docker push $CI_REGISTRY/echelon-it/k8s-data/sample:v1
     - echo "Image built"
+
+deploy_project:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config use-context $KUBE_CONTEXT:k8s-connection
+    - kubectl get pods
+    - kubectl get nodes -o wide
