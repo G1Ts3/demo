@@ -25,3 +25,7 @@ deploy_project:
     - kubectl config use-context $KUBE_CONTEXT
     - kubectl get pods
     - kubectl get nodes -o wide
+    - echo "Deployment LOGIN-APP to K8S"
+    - ls $CI_PROJECT_DIR/k8s-files
+    - kubectl get pods
+    - kubectl get svc
